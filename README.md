@@ -68,4 +68,4 @@ Compatible con todos los navegadores modernos que soporten:
 
 ---
 
-Este proyecto es ideal para quienes buscan una solución rápida, elegante y eficaz para organizar su aprendizaje mediante tarjetas educativas. ¡Prueba Bulk Flashcards Creator y mejora tu forma de estudiar!
+Este proyecto es ideal para quienes buscan una solución rápida, elegante y eficaz para organizar su aprendizaje mediante tarjetas educativas. ¡Prueba EZ-Flashcards Creator y mejora tu forma de estudiar!
