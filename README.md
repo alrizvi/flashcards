@@ -57,6 +57,7 @@ Aunque este proyecto no utiliza una base de datos, la información de las tarjet
 ## Contribuidores
 
 - **Ali Rizvi** - Diseñador e implementador principal del proyecto.
+- **Alan Nin** - Colaborador.
 
 ## Compatibilidad con Navegadores
 
