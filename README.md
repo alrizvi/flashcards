@@ -1,72 +1,219 @@
-# EZ-Flascards
+# 🧠 FlashGenius - Smart Learning Cards con Texto a Voz
 
-Una aplicación basada en navegador para crear y repasar tarjetas educativas (flashcards) de manera masiva, diseñada para facilitar el aprendizaje y la organización del conocimiento.
+Una aplicación web moderna para crear y estudiar flashcards con funcionalidad de reproducción por voz integrada.
 
-## Descripción
+## ✨ Características
 
-Bulk Flashcards Creator permite a los usuarios crear tarjetas educativas rápidamente mediante un formato de texto simple. Su diseño intuitivo y moderno asegura una experiencia fluida, tanto en computadoras como en dispositivos móviles. Ideal para estudiantes, profesionales y cualquier persona que desee estudiar de manera eficiente.
+- **Creación fácil de flashcards**: Formato simple `pregunta::respuesta`
+- **Interfaz moderna**: Diseño glassmorphism con animaciones fluidas
+- **Texto a voz**: Reproduce preguntas y respuestas en audio
+- **Navegación intuitiva**: Controles de teclado y mouse
+- **Progreso visual**: Barra de progreso y estadísticas en tiempo real
+- **Diseño responsivo**: Optimizado para dispositivos móviles y desktop
 
-## Tecnologías Utilizadas
+## 🚀 Cómo usar
 
-El proyecto está desarrollado con:
-- **HTML**: Estructura de la aplicación.
-- **CSS**: Diseño visual y animaciones.
-- **JavaScript**: Lógica interactiva y funcionalidad.
+### 1. Crear flashcards
 
-## Esquema de Datos
-
-Aunque este proyecto no utiliza una base de datos, la información de las tarjetas se genera y gestiona directamente en el navegador.
-
-## Instrucciones para Ejecutar el Proyecto
-
-1. Abrir el archivo `flashcards.html` en tu navegador web.
-2. Introducir las tarjetas en el área de texto utilizando el siguiente formato:
-   ```
-   pregunta::respuesta
-   ```
-3. Hacer clic en "Generar Flashcards" para crear tu mazo de tarjetas.
-4. Navegar por las tarjetas utilizando:
-   - Los botones **Anterior/Siguiente**.
-   - Las teclas de flechas **Izquierda/Derecha**.
-   - La barra espaciadora para voltear las tarjetas.
-
-### Ejemplo de Entrada
+Ingresa tus flashcards en el formato:
 
 ```
-¿Qué es HTML?::Lenguaje de Marcado de Hipertexto
-¿Qué es CSS?::Hojas de Estilo en Cascada
-¿Qué es JavaScript?::Un lenguaje de programación para desarrollo web
+¿Cuál es la capital de Francia?::París
+¿Cuánto es 2 + 2?::4
+¿Qué significa HTML?::HyperText Markup Language
 ```
 
-## Cómo Realizar Pruebas
+### 2. Controles disponibles
 
-1. Generar tarjetas con preguntas y respuestas variadas utilizando el formato indicado.
-2. Verificar que se generen correctamente las tarjetas y que la navegación funcione:
-   - Cambiar entre tarjetas.
-   - Voltear las tarjetas.
-3. Probar en dispositivos móviles para asegurar la adaptabilidad del diseño.
+#### 🖱️ Mouse/Touch
 
-## Características Principales
+- **Clic en la tarjeta**: Voltear para ver la respuesta
+- **Botón 🔊**: Reproducir audio del texto
+- **Botones ← →**: Navegar entre tarjetas
+- **Botón 🔄**: Voltear tarjeta actual
 
-- Creación masiva de tarjetas a partir de texto simple.
-- Interfaz moderna y limpia.
-- Soporte para navegación con teclado.
-- Animación al voltear tarjetas.
-- Diseño adaptativo para dispositivos móviles.
+#### ⌨️ Teclado
 
-## Contribuidores
+- **←/→**: Navegar entre tarjetas
+- **Espacio**: Voltear tarjeta
+- **P**: Reproducir audio de la tarjeta actual
+- **S**: Detener audio
+- **Esc**: Volver al frente y detener audio
 
-- **Ali Rizvi** - Diseñador e implementador principal del proyecto.
-- **Alan Nin** - Colaborador.
+## 🔊 Funcionalidad de Texto a Voz
 
-## Compatibilidad con Navegadores
+### Web Speech API (Por defecto)
 
-Compatible con todos los navegadores modernos que soporten:
-- **CSS Grid**
-- **Flexbox**
-- **Variables CSS**
-- **JavaScript ES6**
+La aplicación usa la Web Speech API del navegador para reproducir texto en voz alta:
+
+- ✅ **Ventajas**: Funciona sin configuración adicional, gratis, offline
+- ⚠️ **Limitaciones**: Calidad variable según el navegador, voces limitadas
+
+### APIs Externas (Configuración avanzada)
+
+#### Google Cloud Text-to-Speech
+
+Para usar Google Cloud TTS, edita `script.js`:
+
+```javascript
+const externalTTSConfig = {
+  googleTTS: {
+    apiKey: "TU_API_KEY_DE_GOOGLE",
+    endpoint: "https://texttospeech.googleapis.com/v1/text:synthesize",
+    voice: {
+      languageCode: "es-ES",
+      name: "es-ES-Neural2-A",
+      ssmlGender: "FEMALE",
+    },
+  },
+};
+
+// Cambiar a false para usar API externa
+ttsConfig.useWebSpeechAPI = false;
+```
+
+#### ElevenLabs TTS
+
+Para usar ElevenLabs:
+
+```javascript
+const externalTTSConfig = {
+  elevenLabs: {
+    apiKey: "TU_API_KEY_DE_ELEVENLABS",
+    voiceId: "TU_VOICE_ID",
+    settings: {
+      stability: 0.75,
+      similarity_boost: 0.75,
+    },
+  },
+};
+```
+
+## 📁 Estructura del proyecto
+
+```
+flashcards/
+├── index.html          # Archivo principal HTML
+├── styles.css          # Estilos CSS
+├── script.js           # Lógica JavaScript
+├── LICENSE.md          # Licencia
+└── README.md           # Este archivo
+```
+
+## 🛠️ Configuración de desarrollo
+
+### Opción 1: Servidor local simple
+
+```bash
+# Python 3
+python -m http.server 8000
+
+# Python 2
+python -m SimpleHTTPServer 8000
+
+# Node.js (si tienes http-server instalado)
+npx http-server
+```
+
+### Opción 2: Live Server (VS Code)
+
+1. Instala la extensión "Live Server"
+2. Clic derecho en `index.html` → "Open with Live Server"
+
+## 🔧 Personalización
+
+### Configurar idioma y voz
+
+En `script.js`, modifica:
+
+```javascript
+const ttsConfig = {
+  useWebSpeechAPI: true,
+  language: "es-ES", // Cambiar idioma (es-ES, en-US, fr-FR, etc.)
+  rate: 0.9, // Velocidad (0.1 - 10)
+  pitch: 1, // Tono (0 - 2)
+  volume: 1, // Volumen (0 - 1)
+};
+```
+
+### Estilos personalizados
+
+Modifica las variables CSS en `styles.css`:
+
+```css
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  /* ... más variables */
+}
+```
+
+## 🌐 Compatibilidad de navegadores
+
+### Web Speech API
+
+- ✅ Chrome/Chromium
+- ✅ Safari (macOS/iOS)
+- ✅ Edge
+- ⚠️ Firefox (limitado)
+
+### APIs Externas
+
+- ✅ Todos los navegadores modernos
+- ⚠️ Requiere conexión a internet
+- 💰 Requiere cuentas de pago en los servicios
+
+## 🚨 Solución de problemas
+
+### Audio no funciona
+
+1. **Verificar permisos**: Algunos navegadores requieren interacción del usuario
+2. **Comprobar volumen**: Verificar volumen del sistema y navegador
+3. **Probar en otro navegador**: Chrome generalmente tiene mejor soporte
+4. **Habilitar audio**: Verificar que el sitio no esté silenciado
+
+### Errores de API externa
+
+1. **API Key válida**: Verificar que las credenciales sean correctas
+2. **Cuotas**: Comprobar límites de uso de la API
+3. **CORS**: Algunas APIs requieren configuración de servidor
+
+## 📝 Notas de desarrollo
+
+### Para agregar nuevas funcionalidades:
+
+1. **Nuevos idiomas**: Agregar códigos en la configuración de TTS
+2. **Más APIs**: Implementar nuevas funciones en `useExternalTTSAPI()`
+3. **Mejores voces**: Configurar voces premium en las APIs externas
+
+### Estructura del código:
+
+- `createFlashcards()`: Genera las tarjetas desde el texto
+- `speakText()`: Función principal de TTS
+- `updateCardDisplay()`: Maneja la navegación y progreso
+- `stopCurrentAudio()`: Detiene y resetea audio
+
+## 📄 Licencia
+
+Este proyecto está bajo la licencia MIT. Ver `LICENSE.md` para más detalles.
+
+## 🤝 Contribución
+
+1. Fork el proyecto
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+## 📞 Soporte
+
+Si tienes problemas o sugerencias:
+
+1. Revisa los problemas comunes en este README
+2. Abre un issue en GitHub
+3. Consulta la documentación de las APIs externas
 
 ---
 
-Este proyecto es ideal para quienes buscan una solución rápida, elegante y eficaz para organizar su aprendizaje mediante tarjetas educativas. ¡Prueba EZ-Flashcards Creator y mejora tu forma de estudiar!
+¡Hecho con ❤️ para mejorar tu experiencia de aprendizaje!

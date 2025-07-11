@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SMART-CARDS - Smart Learning Cards</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🧠 SMART-CARDS</h1>
+        <p>Transform your learning with interactive smart flashcards</p>
+      </div>
+
+      <div class="input-section">
+        <label class="input-label">Create Your Study Set</label>
+        <div class="format-example">
+          <strong>Formatos soportados:</strong><br />
+          <em>• Simple: ¿Cuál es la capital de Francia?::París</em><br />
+          <em>• Opciones múltiples: pregunta con a) b) c) d)::respuesta</em>
+        </div>
+        <textarea
+          id="bulkInput"
+          placeholder="¿Qué es machine learning?::Un subconjunto de IA que permite a las computadoras aprender de los datos
+Al ocurrir una Ruptura Prematura de Membranas (RPM):
+a) Se asocia a una interrupción en la red de Colágenos
+b) Observamos que en el área de ruptura hay niveles de reducción de colágeno tipo III
+c) Aumenta la presencia de macrófagos
+d) Disminuye la alfa elastina tipo IV::La respuesta correcta es a) Se asocia a una interrupción en la red de Colágenos
+¿Cuáles son los colores primarios?::Rojo, Azul, Amarillo"
+        ></textarea>
+        <button class="btn btn-primary" onclick="createFlashcards()">
+          ✨ Generate Flashcards
+        </button>
+      </div>
+
+      <div id="flashcardsContainer" class="flashcards-container">
+        <div class="study-stats">
+          <div class="stat-card">
+            <span class="stat-number" id="totalCards">0</span>
+            <div class="stat-label">Total Cards</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="currentCard">0</span>
+            <div class="stat-label">Current</div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number" id="progressPercent">0%</span>
+            <div class="stat-label">Progress</div>
+          </div>
+        </div>
+
+        <div class="progress-section">
+          <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+          </div>
+          <!-- <div class="card-counter" id="cardCounter"></div> -->
+        </div>
+
+        <div class="keyboard-hints">
+          <h3>⌨️ Atajos de Teclado</h3>
+          <div class="keyboard-shortcuts">
+            <div class="shortcut-bubble">
+              <div class="key-bubble">←</div>
+              <div class="shortcut-label">Anterior</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">→</div>
+              <div class="shortcut-label">Siguiente</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">Space</div>
+              <div class="shortcut-label">Voltear</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">P</div>
+              <div class="shortcut-label">Audio</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">S</div>
+              <div class="shortcut-label">Parar</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">F</div>
+              <div class="shortcut-label">Enfocar</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">1-9</div>
+              <div class="shortcut-label">Saltar</div>
+            </div>
+            <div class="shortcut-bubble">
+              <div class="key-bubble">Esc</div>
+              <div class="shortcut-label">Reset</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control-group">
+            <button class="btn icon-btn nav-btn" onclick="previousCard()">
+              ←
+            </button>
+            <button
+              class="btn icon-btn flip-btn floating"
+              onclick="toggleCard()"
+            >
+              🔄
+            </button>
+            <button class="btn icon-btn nav-btn" onclick="nextCard()">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
